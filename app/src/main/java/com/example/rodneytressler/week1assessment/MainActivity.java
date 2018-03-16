@@ -15,7 +15,7 @@ public class MainActivity extends AppCompatActivity {
     private TextView text;
     private EditText input;
     private String textInput;
-    private String toastText;
+    private Button nextPage;
 
 
     @Override
@@ -25,7 +25,10 @@ public class MainActivity extends AppCompatActivity {
         submit = findViewById(R.id.button_submit);
         text = findViewById(R.id.text_view);
         input = findViewById(R.id.edit_text);
+        nextPage = findViewById(R.id.next);
         submit.setOnClickListener(changeText);
+        nextPage.setOnClickListener(changeScreen);
+
 
     }
 
@@ -34,20 +37,25 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 textInput = input.getText().toString();
                 text.setText(textInput);
-                //toastUser();
+                toastUser();
                 input.getText().clear();
             }
         };
 
+    View.OnClickListener changeScreen = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            changeScreen();
+        }
+    };
+
     private void toastUser() {
-        Toast android = new Toast(this);
-        android.setText("Android is fun!");
-        android.setDuration(Toast.LENGTH_SHORT);
-        android.show();
+        Toast.makeText(this, "Android is Awesome!", Toast.LENGTH_SHORT).show();
     }
 
     private void changeScreen() {
-        Intent screen2 = new Intent();
+        Intent screen2 = new Intent(this, Main2Activity.class);
+        startActivity(screen2);
     }
 }
 
